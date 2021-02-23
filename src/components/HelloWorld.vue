@@ -103,8 +103,6 @@
 </template>
 
 <script>
-a = '123
-
 export default {
   name: "HelloWorld",
   props: {
