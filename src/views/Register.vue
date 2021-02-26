@@ -12,10 +12,10 @@
         <input id="password" v-model="password" type="password" />
       </div>
       <button class="submit" type="submit">Register</button>
-      <div v-if="this.$store.state.error" class="error">{{ getError }}</div>
+      <div v-if="getError" class="error">{{ getError }}</div>
       <p>
         Have an account?
-        <router-link to="login">Click here</router-link>
+        <router-link to="/login">Click here</router-link>
       </p>
     </form>
   </div>
@@ -57,12 +57,12 @@ export default {
   max-width: 762px
   .introduction
     width: 100%
-    height: 50px
+    height: auto
     text-align: center
-    margin 50px 0px
+    padding: 50px 0px 30px 0px;
   .form
     background: #fff
-    padding: 20px 20px
+    padding: 20px
     margin: 0 auto
     box-shadow: 0 0 10px #999
     border-radius: 2px

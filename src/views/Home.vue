@@ -22,6 +22,12 @@ export default {
 
 <style lang="sass" scoped>
 .home
-  margin: 0 auto
+  margin: 0px auto
+  margin-top: 40px
+  margin-bottom: 20px
   max-width: 762px
+  box-shadow: 0 0 10px #999
+  border-radius: 2px
+  @media (max-width: 662px)
+    box-shadow: none
 </style>

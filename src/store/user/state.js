@@ -1,4 +1,7 @@
 export default {
   user: null,
-  error: ""
+  error: "",
+  tasks: [],
+  task: null,
+  check: false
 };

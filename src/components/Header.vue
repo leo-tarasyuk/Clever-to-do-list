@@ -26,10 +26,10 @@ export default {
   display: flex
   justify-content: space-between
   align-items: center
-  padding: 50px 0px 10px 0px
+  padding: 20px 0px 10px 0px
   .logo-page
     margin: 0px
-    padding: 10px
+    padding: 10px 10px 10px 50px
     font-size: 30px
     color: darken(#e5e5e5, 80%)
   button
@@ -43,7 +43,7 @@ export default {
     display: block
     font-size: 16px
     outline: none
-    margin: 10px
+    margin: 10px 50px 10px 10px
     &:hover
       background: rgba(239,239,239, 1)
 </style>

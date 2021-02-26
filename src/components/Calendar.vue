@@ -99,7 +99,7 @@ export default {
     justify-content: center;
     align-items: center;
     .calendar-size
-      width: 762px;
+      width: 662px;
       height: inherit;
       display: flex;
       justify-content: center;

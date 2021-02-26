@@ -1,33 +1,39 @@
 <template>
   <div class="tasks">
-    <h2 class="count-task">{{ data.length }} Tasks Today</h2>
-    <ul v-if="data.length" class="list">
+    <h2 class="count-task">{{ getTasks.length }} Tasks Today</h2>
+    <ul v-if="getTasks.length" class="list">
       <li
-        v-for="item in data"
-        :key="item.name"
+        v-for="item in getTasks"
+        :key="item.id"
         class="name-of-task"
-        @click="cheakTask"
+        @click="goToTask(true, item)"
       >
         <label :class="{ done: item.status, label: !item.status }"></label>
         <div class="name">{{ item.name }}</div>
       </li>
     </ul>
     <div class="button">
-      <button @click="cheakTask">+ Add a new task</button>
+      <button @click="goToTask(false, {})">+ Add a new task</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
-  data() {
-    return {
-      data: []
-    };
+  computed: {
+    ...mapGetters("user", ["getTasks"])
+  },
+  created() {
+    this.showTasks();
   },
   methods: {
-    cheakTask() {
-      if (this.data.length !== 0) this.$router.replace({ name: "Task" });
+    ...mapActions("user", ["showTasks", "checkTask", "showTask"]),
+    goToTask(isState, data) {
+      this.checkTask(isState);
+      this.showTask(data);
+      this.$router.replace({ name: "Task" });
     }
   }
 };
@@ -38,12 +44,13 @@ export default {
   margin: 0px
   padding: 0px
   .tasks
+    padding: 0px 50px 0px 50px
     .count-task
       padding: 0px 10px 15px 10px
     .list
       .name-of-task
         display: flex
-        align-item: center
+        align-items: center
         list-style: none
         padding: 15px 0px
         cursor: pointer;
@@ -83,6 +90,7 @@ export default {
         font-size: 20px
         padding: 10px 0px
         border-radius: 10px
+        margin-bottom: 40px
         &:hover
           background: rgba(255,106,0,0.7)
 </style>
