@@ -22,7 +22,7 @@ npm run lint
 ```
 
 # Database snapshot
-![alt tag](https://drive.google.com/file/d/1mRgdrwcdsx0GN3cKuThcXGsR8-BbGiHm/view?usp=sharing)
+![alt tag](https://drive.google.com/file/d/1mRgdrwcdsx0GN3cKuThcXGsR8-BbGiHm/view)
 
 # Aplication stack:
 
