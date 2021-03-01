@@ -52,7 +52,8 @@ sass-loader
         - main.js
     - .browserslistrc
     - .eslintrc
+    - .gitignore
     - babel.config.js
-    - bpackage-lock.json
+    - package-lock.json
     - package.json
     - README.md
