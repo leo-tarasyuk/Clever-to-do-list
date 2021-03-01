@@ -59,19 +59,19 @@ export default {
         .label
           display: block
           cursor: pointer;
-          width: 16px
-          height: 16px
+          width: 10px
+          height: 10px
           border-radius: 50%
-          border: 2px solid rgba(255,106,0,1)
+          background: rgba(0,0,0,1)
           margin: 0px 10px 0px 15px
         .done
           display: block
-          width: 8px
-          height: 8px
+          cursor: pointer
+          width: 10px
+          height: 10px
           border-radius: 50%
-          border: 7px solid rgba(255,106,0,1)
+          background: rgba(0,255,0,1)
           margin: 0px 10px 0px 15px
-          cursor: pointer;
         .name
           height: auto
           font-size: 20px;

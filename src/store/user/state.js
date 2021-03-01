@@ -3,5 +3,11 @@ export default {
   error: "",
   tasks: [],
   task: null,
-  check: false
+  check: false,
+  currentDay: {
+    day: new Date().getDate(),
+    month: new Date().getMonth(),
+    year: new Date().getFullYear()
+  },
+  modalWindow: false
 };

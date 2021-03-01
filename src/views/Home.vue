@@ -28,6 +28,6 @@ export default {
   max-width: 762px
   box-shadow: 0 0 10px #999
   border-radius: 2px
-  @media (max-width: 662px)
+  @media (max-width: 762px)
     box-shadow: none
 </style>

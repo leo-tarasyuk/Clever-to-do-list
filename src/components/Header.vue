@@ -6,12 +6,21 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
   methods: {
+    ...mapActions("user", ["chooseDate"]),
     async signOut() {
+      const currentDay = {
+        day: new Date().getDate(),
+        month: new Date().getMonth(),
+        year: new Date().getFullYear()
+      };
+      this.chooseDate(currentDay);
       await firebase.default.auth().signOut();
       this.$router.replace({ name: "Login" });
     }

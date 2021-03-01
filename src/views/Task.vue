@@ -9,14 +9,19 @@
         <label
           :class="{ done: getTask.status, label: !getTask.status }"
         ></label>
-        <input v-show="!getCheckTask" v-model="name" class="name" type="text" />
+        <input
+          v-show="!getCheckTask"
+          v-model="getTask.name"
+          class="name"
+          type="text"
+        />
         <div v-show="getCheckTask" class="name" type="text">
           {{ getTask.name }}
         </div>
       </div>
       <textarea
         v-show="!getCheckTask"
-        v-model="description"
+        v-model="getTask.description"
         class="description"
         rows="20"
         cols="45"
@@ -27,41 +32,56 @@
     </div>
     <div class="buttons">
       <button
-        v-show="!getCheckTask"
+        v-if="!getCheckTask"
         class="save"
-        @click="createNewTask({ description, name, status })"
+        @click="
+          createNewTask({
+            description: getTask.description,
+            name: getTask.name,
+            status: false
+          })
+        "
       >
         Save
       </button>
-      <button v-show="getCheckTask" class="edit">Edit</button>
+      <button v-if="getCheckTask" class="edit" @click="showModalWindow(true)">
+        Edit
+      </button>
       <button
-        v-show="getCheckTask"
-        v-if="!getTask.status"
+        v-if="getCheckTask"
+        v-show="!getTask.status"
         class="complete"
         @click="taskIsComplete(true)"
       >
         Complite
       </button>
     </div>
+    <Modal
+      v-if="getModalWindow"
+      :description="getTask.description"
+      :name="getTask.name"
+    />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Modal from "../components/Modal";
 
 export default {
-  data() {
-    return {
-      description: "",
-      name: "",
-      status: false
-    };
+  components: {
+    Modal
   },
   computed: {
-    ...mapGetters("user", ["getCheckTask", "getTask"])
+    ...mapGetters("user", ["getCheckTask", "getTask", "getModalWindow"])
   },
   methods: {
-    ...mapActions("user", ["createTask", "completeTask"]),
+    ...mapActions("user", [
+      "createTask",
+      "completeTask",
+      "showModalWindow",
+      "showTasks"
+    ]),
     backHome() {
       this.$router.replace({ name: "Home" });
     },
@@ -77,7 +97,7 @@ export default {
 };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 *
   margin: 0px
   padding: 0px
@@ -89,6 +109,7 @@ export default {
     border-radius: 2px
     @media (max-width: 662px)
       box-shadow: none
+    position: relative
     header
       width: 100%
       height: 50px
@@ -117,22 +138,24 @@ export default {
         padding: 15px 0px
         .label
           display: block
-          width: 16px
-          height: 16px
+          cursor: pointer;
+          width: 10px
+          height: 10px
           border-radius: 50%
-          border: 2px solid rgba(255,106,0,1)
+          background: rgba(0,0,0,1)
           margin: 0px 10px 0px 15px
         .done
           display: block
-          width: 8px
-          height: 8px
+          cursor: pointer
+          width: 10px
+          height: 10px
           border-radius: 50%
-          border: 7px solid rgba(255,106,0,1)
+          background: rgba(0,255,0,1)
           margin: 0px 10px 0px 15px
-          cursor: pointer;
         .name
           width: 90%
           font-size: 20px;
+          word-wrap: break-word
       .description
         width: 80%
         height: 200px
