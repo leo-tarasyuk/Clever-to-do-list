@@ -8,45 +8,43 @@ import firebase from "firebase/app";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-    meta: {
-      requiresGuest: true
-    }
-  },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register,
-    meta: {
-      requiresGuest: true
-    }
-  },
-  {
-    path: "/task",
-    name: "Task",
-    component: Task,
-    meta: {
-      requiresAuth: true
-    }
-  }
-];
-
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes: [
+    {
+      path: "/",
+      name: "Home",
+      component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login,
+      meta: {
+        requiresGuest: true
+      }
+    },
+    {
+      path: "/register",
+      name: "Register",
+      component: Register,
+      meta: {
+        requiresGuest: true
+      }
+    },
+    {
+      path: "/task",
+      name: "Task",
+      component: Task,
+      meta: {
+        requiresAuth: true
+      }
+    }
+  ]
 });
 
 router.beforeEach((to, from, next) => {

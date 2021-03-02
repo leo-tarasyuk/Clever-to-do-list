@@ -1,4 +1,3 @@
-import * as types from "./mutation-types";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
@@ -8,7 +7,7 @@ async function setRegisterUser({ commit }, payload) {
     .auth()
     .createUserWithEmailAndPassword(payload.email, payload.password);
 
-  commit(types.SET_USER, user.user.uid);
+  commit("SET_USER", user.user.uid);
 }
 
 async function setLoginUser({ commit }, payload) {
@@ -16,11 +15,11 @@ async function setLoginUser({ commit }, payload) {
     .auth()
     .signInWithEmailAndPassword(payload.email, payload.password);
 
-  commit(types.SET_USER, user.user.uid);
+  commit("SET_USER", user.user.uid);
 }
 
 function setError({ commit }, payload) {
-  commit(types.SET_ERROR, payload);
+  commit("SET_ERROR", payload);
 }
 
 function chooseDate({ commit, state }, payload) {
@@ -30,7 +29,7 @@ function chooseDate({ commit, state }, payload) {
   state.currentDay.month = month;
   state.currentDay.year = year;
 
-  commit(types.SET_DATE, state.currentDay);
+  commit("SET_DATE", state.currentDay);
 }
 
 async function createTask({ state }, payload) {
@@ -53,23 +52,24 @@ async function showTasks({ commit, state }) {
   if (tasks !== null) {
     Object.keys(tasks).forEach(key => {
       if (
-        tasks[key].date.day == state.currentDay.day &&
-        tasks[key].date.month == state.currentDay.month
+        tasks[key].user === state.user &&
+        tasks[key].date.day === state.currentDay.day &&
+        tasks[key].date.month === state.currentDay.month
       ) {
-        data.push({ ...tasks[key], id: key });
+        data.push({ ...tasks[key] });
       }
     });
   }
 
-  commit(types.GET_TASKS, data);
+  commit("GET_TASKS", data);
 }
 
 function checkTask({ commit }, payload) {
-  commit(types.CHECK_TASK, payload);
+  commit("CHECK_TASK", payload);
 }
 
 function showTask({ commit }, payload) {
-  commit(types.SHOW_TASK, payload);
+  commit("SHOW_TASK", payload);
 }
 
 async function completeTask({ state }, payload) {
@@ -80,10 +80,6 @@ async function completeTask({ state }, payload) {
     .ref("tasks")
     .child(id)
     .update({ status: payload });
-}
-
-function showModalWindow({ commit }, payload) {
-  commit(types.SHOW_MODAL_WINDOW, payload);
 }
 
 async function changeTask({ state }, payload) {
@@ -106,6 +102,5 @@ export default {
   checkTask,
   showTask,
   completeTask,
-  showModalWindow,
   changeTask
 };

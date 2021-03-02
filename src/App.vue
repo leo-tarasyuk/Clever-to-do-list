@@ -4,8 +4,9 @@
   </div>
 </template>
 
-<style lang="sass">
-body
-  margin: 0px
-  padding: 0px
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
 </style>

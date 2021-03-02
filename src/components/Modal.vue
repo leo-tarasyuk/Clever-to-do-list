@@ -45,6 +45,10 @@ export default {
     name: {
       type: String,
       required: true
+    },
+    modal: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
@@ -54,93 +58,112 @@ export default {
     };
   },
   methods: {
-    ...mapActions("user", ["showModalWindow", "changeTask"]),
+    ...mapActions("user", ["changeTask"]),
     getTextOfTask(name, description) {
       this.changeTask({ name, description });
       this.showModalWindow(false);
       this.$router.replace({ name: "Home" });
+    },
+    showModalWindow(state) {
+      this.$emit("stateChanged", state);
     }
   }
 };
 </script>
 
-<style lang="sass" scoped>
-.modal
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
+<style lang="scss" scoped>
+.modal {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
   background-color: rgba(0, 0, 0, 0.4);
-  .modal-head
+  .modal-head {
     height: 30px;
     display: flex;
     align-items: center;
     background-color: #ffffff;
     position: relative;
-    .close
+    .close {
       position: absolute;
       right: 10px;
       width: 20px;
       height: 20px;
       opacity: 0.3;
-      &:hover
+      &:hover {
         opacity: 1;
+      }
       &:before,
-      &:after
+      &:after {
         position: absolute;
         left: 15px;
         content: " ";
         height: 20px;
         width: 2px;
         background-color: #333;
-      &:before
+      }
+      &:before {
         transform: rotate(45deg);
-      &:after
+      }
+      &:after {
         transform: rotate(-45deg);
-  .component
+      }
+    }
+  }
+  .component {
     min-width: 662px;
-    height: 100%
+    height: 100%;
     background-color: #ffffff;
-    display: flex
-    flex-direction: column
-    @media (max-width: 762px)
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 762px) {
       min-width: 300px;
-    .task-name
-      margin: 0px
-      font-size: 20px
-      padding: 0px 0px 20px 10px
-      .name
-        font-size: 20px
+    }
+    .task-name {
+      margin: 0;
+      font-size: 20px;
+      padding: 0px 0px 20px 10px;
+      .name {
+        font-size: 20px;
         width: 70%;
-    .description-size
-        display: flex
-        width: 100%
-        justify-content: center
-        .description
-            width: 90%
-            height: 200px
-            font-size: 18px
-            resize: none;
-            font-weight: normal;
-    .buttons
-      .save
-        width: 100px
-        height: 40px
-        border-radius: 5px
-        background: rgba(255,106,0,1)
-        border: none
-        color: #fff
-        cursor: pointer
-        display: block
-        font-size: 16px
-        outline: none
-        margin: 10px 0px 0px 20px
-        &:hover
-          background: rgba(255,106,0,0.7)
+      }
+    }
+    .description-size {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      .description {
+        width: 90%;
+        height: 200px;
+        font-size: 18px;
+        resize: none;
+        font-weight: normal;
+      }
+    }
+    .buttons {
+      .save {
+        width: 100px;
+        height: 40px;
+        border-radius: 5px;
+        background: rgba(255, 106, 0, 1);
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        font-size: 16px;
+        outline: none;
+        margin: 10px 0px 0px 20px;
+        &:hover {
+          background: rgba(255, 106, 0, 0.7);
+        }
+      }
+    }
+  }
+}
 </style>
