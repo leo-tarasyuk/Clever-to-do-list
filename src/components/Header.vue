@@ -8,7 +8,7 @@
 <script>
 import { mapActions } from "vuex";
 
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
@@ -21,7 +21,7 @@ export default {
         year: new Date().getFullYear()
       };
       this.chooseDate(currentDay);
-      await firebase.default.auth().signOut();
+      await firebase.auth().signOut();
       this.$router.replace({ name: "Login" });
     }
   }

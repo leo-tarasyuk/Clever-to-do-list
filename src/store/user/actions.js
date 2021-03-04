@@ -1,9 +1,9 @@
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
 async function setRegisterUser({ commit }, payload) {
-  const user = await firebase.default
+  const user = await firebase
     .auth()
     .createUserWithEmailAndPassword(payload.email, payload.password);
 
@@ -11,7 +11,7 @@ async function setRegisterUser({ commit }, payload) {
 }
 
 async function setLoginUser({ commit }, payload) {
-  const user = await firebase.default
+  const user = await firebase
     .auth()
     .signInWithEmailAndPassword(payload.email, payload.password);
 
@@ -35,14 +35,14 @@ function chooseDate({ commit, state }, payload) {
 async function createTask({ state }, payload) {
   payload.user = state.user;
   payload.date = state.currentDay;
-  await firebase.default
+  await firebase
     .database()
     .ref("tasks")
     .push(payload);
 }
 
 async function showTasks({ commit, state }) {
-  const task = await firebase.default
+  const task = await firebase
     .database()
     .ref("tasks")
     .once("value");
@@ -56,7 +56,7 @@ async function showTasks({ commit, state }) {
         tasks[key].date.day === state.currentDay.day &&
         tasks[key].date.month === state.currentDay.month
       ) {
-        data.push({ ...tasks[key] });
+        data.push({ ...tasks[key], id: key });
       }
     });
   }
@@ -75,7 +75,7 @@ function showTask({ commit }, payload) {
 async function completeTask({ state }, payload) {
   const id = state.task.id;
 
-  await firebase.default
+  await firebase
     .database()
     .ref("tasks")
     .child(id)
@@ -85,7 +85,7 @@ async function completeTask({ state }, payload) {
 async function changeTask({ state }, payload) {
   const id = state.task.id;
 
-  await firebase.default
+  await firebase
     .database()
     .ref("tasks")
     .child(id)
