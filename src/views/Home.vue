@@ -1,21 +1,24 @@
 <template>
   <div class="home">
-    <Header />
-    <Calendar />
-    <ListOfTasks />
+    <lazyHeader />
+    <lazyCalendar />
+    <lazyListOfTasks />
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header";
-import Calendar from "@/components/Calendar";
-import ListOfTasks from "@/components/ListOfTasks";
+const lazyHeader = () => import("@/components/Header");
+const lazyCalendar = () => import("@/components/Calendar");
+const lazyListOfTasks = () => import("@/components/ListOfTasks");
+// import Header from "@/components/Header";
+// import Calendar from "@/components/Calendar";
+// import ListOfTasks from "@/components/ListOfTasks";
 
 export default {
   components: {
-    Header,
-    Calendar,
-    ListOfTasks
+    lazyHeader,
+    lazyCalendar,
+    lazyListOfTasks
   }
 };
 </script>

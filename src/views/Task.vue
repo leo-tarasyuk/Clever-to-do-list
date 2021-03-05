@@ -56,7 +56,7 @@
         Complite
       </button>
     </div>
-    <Modal
+    <lazyModal
       v-if="stateForShowModal"
       :description="getTask.description"
       :name="getTask.name"
@@ -68,11 +68,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Modal from "../components/Modal";
+const lazyModal = () => import("@/components/Modal");
 
 export default {
   components: {
-    Modal
+    lazyModal
   },
   data() {
     return {

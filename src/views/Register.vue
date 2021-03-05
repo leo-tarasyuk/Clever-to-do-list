@@ -1,16 +1,16 @@
 <template>
   <div>
-    <Form :name="name" :text="text" :route="route" :auth="register" />
+    <lazyForm :name="name" :text="text" :route="route" :auth="register" />
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
-import Form from "../components/Form";
+const lazyForm = () => import("@/components/Form");
 
 export default {
   components: {
-    Form
+    lazyForm
   },
   data() {
     return {
