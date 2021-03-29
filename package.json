@@ -19,6 +19,9 @@
     ]
   },
   "dependencies": {
+    "@firebase/auth": "^0.16.4",
+    "@firebase/database": "^0.9.5",
+    "@firebase/firestore": "^2.2.0",
     "core-js": "^3.6.5",
     "firebase": "^8.2.9",
     "vue": "^2.6.11",

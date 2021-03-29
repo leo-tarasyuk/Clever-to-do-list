@@ -5,36 +5,44 @@ import "firebase/database";
 async function setRegisterUser({ commit }, payload) {
   const user = await firebase
     .auth()
-    .createUserWithEmailAndPassword(payload.email, payload.password);
+    .createUserWithEmailAndPassword(payload.email, payload.password)
+    .then(data => {
+      commit("SET_USER", data.user.uid);
+      return null;
+    })
+    .catch(e => e.message);
 
-  commit("SET_USER", user.user.uid);
+  return user;
 }
 
 async function setLoginUser({ commit }, payload) {
   const user = await firebase
     .auth()
-    .signInWithEmailAndPassword(payload.email, payload.password);
+    .signInWithEmailAndPassword(payload.email, payload.password)
+    .then(data => {
+      commit("SET_USER", data.user.uid);
+      return null;
+    })
+    .catch(e => e.message);
 
-  commit("SET_USER", user.user.uid);
+  return user;
 }
 
-function setError({ commit }, payload) {
-  commit("SET_ERROR", payload);
-}
-
-function chooseDate({ commit, state }, payload) {
+async function chooseDateAndSignOut({ commit, state }, payload) {
   const { day, month, year } = payload;
 
   state.currentDay.day = day;
   state.currentDay.month = month;
   state.currentDay.year = year;
 
+  await firebase.auth().signOut();
   commit("SET_DATE", state.currentDay);
 }
 
 async function createTask({ state }, payload) {
   payload.user = state.user;
   payload.date = state.currentDay;
+
   await firebase
     .database()
     .ref("tasks")
@@ -95,8 +103,7 @@ async function changeTask({ state }, payload) {
 export default {
   setRegisterUser,
   setLoginUser,
-  setError,
-  chooseDate,
+  chooseDateAndSignOut,
   createTask,
   showTasks,
   checkTask,

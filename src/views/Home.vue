@@ -10,9 +10,6 @@
 const lazyHeader = () => import("@/components/Header");
 const lazyCalendar = () => import("@/components/Calendar");
 const lazyListOfTasks = () => import("@/components/ListOfTasks");
-// import Header from "@/components/Header";
-// import Calendar from "@/components/Calendar";
-// import ListOfTasks from "@/components/ListOfTasks";
 
 export default {
   components: {
@@ -32,6 +29,7 @@ export default {
   box-shadow: 0 0 10px #999;
   border-radius: 2px;
 }
+
 @media (max-width: 762px) {
   .home {
     box-shadow: none;

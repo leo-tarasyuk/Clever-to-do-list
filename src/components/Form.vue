@@ -12,7 +12,7 @@
         <input id="password" v-model="password" type="password" />
       </div>
       <button class="submit" type="submit">{{ name }}</button>
-      <div v-if="getError" class="error">{{ getError }}</div>
+      <div v-if="error" class="error">{{ error }}</div>
       <p>
         {{ text }}
         <router-link :to="route">Click here</router-link>
@@ -41,6 +41,10 @@ export default {
     auth: {
       type: Function,
       required: true
+    },
+    error: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -59,12 +63,14 @@ export default {
 .login-and-register {
   margin: 0 auto;
   max-width: 762px;
+
   .introduction {
     width: 100%;
     height: auto;
     text-align: center;
     padding: 50px 0px 30px 0px;
   }
+
   .form {
     background: #fff;
     padding: 20px;
@@ -74,6 +80,7 @@ export default {
     @media (max-width: 992px) {
       box-shadow: none;
     }
+
     .logo-page {
       padding: 10px;
       text-align: center;
@@ -81,9 +88,11 @@ export default {
       border-bottom: solid 1px #e5e5e5;
       margin-top: 0;
     }
+
     .form-group {
       position: relative;
       margin-bottom: 10px;
+
       label {
         position: absolute;
         left: 5px;
@@ -95,6 +104,7 @@ export default {
         font-weight: 400;
         background-color: rgba(255, 255, 255, 0);
       }
+
       input {
         display: block;
         box-sizing: border-box;
@@ -110,6 +120,7 @@ export default {
         }
       }
     }
+
     button {
       width: 100%;
       background: rgba(255, 106, 0, 1);
@@ -127,6 +138,7 @@ export default {
         background: rgba(255, 106, 0, 0.7);
       }
     }
+
     .error {
       margin: 0;
       text-align: center;
@@ -134,6 +146,7 @@ export default {
       font-size: 16pх;
       padding-bottom: 10px;
     }
+
     p {
       margin: 0;
       text-align: center;

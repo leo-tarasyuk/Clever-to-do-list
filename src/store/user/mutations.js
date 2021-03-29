@@ -2,9 +2,6 @@ export default {
   ["SET_USER"](state, payload) {
     state.user = payload;
   },
-  ["SET_ERROR"](state, payload) {
-    state.error = payload;
-  },
   ["SET_DATE"](state, payload) {
     state.currentDay = payload;
   },

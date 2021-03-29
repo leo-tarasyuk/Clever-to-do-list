@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { routePath } from "../router";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -33,7 +34,7 @@ export default {
     goToTask(isState, data) {
       this.checkTask(isState);
       this.showTask(data);
-      this.$router.replace({ name: "Task" });
+      this.$router.push(routePath.task);
     }
   }
 };
@@ -43,17 +44,21 @@ export default {
 * {
   margin: 0;
   padding: 0;
+
   .tasks {
     padding: 0px 50px 0px 50px;
+
     .count-task {
       padding: 0px 10px 15px 10px;
     }
+
     .list {
       .name-of-task {
         display: flex;
         align-items: center;
         list-style: none;
         padding: 15px 0px;
+
         .label {
           display: block;
           cursor: pointer;
@@ -63,6 +68,7 @@ export default {
           background: rgba(0, 0, 0, 1);
           margin: 0px 10px 0px 15px;
         }
+
         .done {
           display: block;
           cursor: pointer;
@@ -72,21 +78,25 @@ export default {
           background: rgba(0, 255, 0, 1);
           margin: 0px 10px 0px 15px;
         }
+
         .name {
           height: auto;
           font-size: 20px;
         }
       }
+
       .name-of-task:hover {
         background: rgba(0, 0, 0, 0.1);
       }
     }
+
     .button {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       padding-top: 15px;
+
       button {
         width: 95%;
         background: rgba(255, 106, 0, 1);

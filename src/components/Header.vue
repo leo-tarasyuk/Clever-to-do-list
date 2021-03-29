@@ -7,22 +7,21 @@
 
 <script>
 import { mapActions } from "vuex";
-
-import firebase from "firebase/app";
-import "firebase/auth";
+import { routePath } from "../router";
 
 export default {
   methods: {
-    ...mapActions("user", ["chooseDate"]),
+    ...mapActions("user", ["chooseDateAndSignOut"]),
     async signOut() {
       const currentDay = {
         day: new Date().getDate(),
         month: new Date().getMonth(),
         year: new Date().getFullYear()
       };
-      this.chooseDate(currentDay);
-      await firebase.auth().signOut();
-      this.$router.replace({ name: "Login" });
+
+      await this.chooseDateAndSignOut(currentDay);
+      localStorage.removeItem("email");
+      this.$router.replace(routePath.login);
     }
   }
 };
@@ -36,12 +35,14 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 20px 0px 10px 0px;
+
   .logo-page {
     margin: 0;
     padding: 10px 10px 10px 50px;
     font-size: 30px;
     color: darken(#e5e5e5, 80%);
   }
+
   button {
     width: 75px;
     height: 25px;

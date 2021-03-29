@@ -1,18 +1,12 @@
 <template>
   <div class="modal" @click="showModalWindow(false)">
-    <div
-      @click="
-        event => {
-          event.stopPropagation();
-        }
-      "
-    >
+    <div @click="stopProp">
       <div class="modal-head">
         <span class="close" @click="showModalWindow(false)"></span>
       </div>
       <div class="component">
         <div class="task-name">
-          Task :
+          Task:
           <input v-model="task" class="name" type="text" />
         </div>
         <div class="description-size">
@@ -34,6 +28,7 @@
 </template>
 
 <script>
+import { routePath } from "../router";
 import { mapActions } from "vuex";
 
 export default {
@@ -62,10 +57,13 @@ export default {
     getTextOfTask(name, description) {
       this.changeTask({ name, description });
       this.showModalWindow(false);
-      this.$router.replace({ name: "Home" });
+      this.$router.push(routePath.home);
     },
     showModalWindow(state) {
       this.$emit("stateChanged", state);
+    },
+    stopProp(event) {
+      event.stopPropagation();
     }
   }
 };
@@ -84,12 +82,14 @@ export default {
   top: 0;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.4);
+
   .modal-head {
     height: 30px;
     display: flex;
     align-items: center;
     background-color: #ffffff;
     position: relative;
+
     .close {
       position: absolute;
       right: 10px;
@@ -116,6 +116,7 @@ export default {
       }
     }
   }
+
   .component {
     min-width: 662px;
     height: 100%;
@@ -125,6 +126,7 @@ export default {
     @media (max-width: 762px) {
       min-width: 300px;
     }
+
     .task-name {
       margin: 0;
       font-size: 20px;
@@ -134,10 +136,12 @@ export default {
         width: 70%;
       }
     }
+
     .description-size {
       display: flex;
       width: 100%;
       justify-content: center;
+
       .description {
         width: 90%;
         height: 200px;
@@ -146,6 +150,7 @@ export default {
         font-weight: normal;
       }
     }
+
     .buttons {
       .save {
         width: 100px;

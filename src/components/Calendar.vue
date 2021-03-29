@@ -1,7 +1,7 @@
 <template>
   <div class="calendar">
     <div class="calendar-size" @mousemove="onScroll" @mouseleave="offScroll">
-      <ul class="list-of-days">
+      <ul ref="list_of_days" class="list-of-days">
         <li
           v-for="item in calendar"
           :key="item.day"
@@ -46,15 +46,16 @@ export default {
       this.showTasks();
     },
     offScroll() {
-      document.querySelector(".list-of-days").style.overflow = "hidden";
+      this.$refs.list_of_days.style.overflow = "hidden";
     },
     onScroll() {
-      document.querySelector(".list-of-days").style.overflow = "auto";
+      this.$refs.list_of_days.style.overflow = "auto";
     },
     createCalendar(month, day, year) {
       const date = new Date(year, month, day);
       const week = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"];
       const calendar = [];
+
       do {
         calendar.push({
           day: date.getDate(),
@@ -67,6 +68,7 @@ export default {
 
         date.setDate(date.getDate() + 1);
       } while (day !== date.getDate());
+
       return calendar;
     }
   }
@@ -77,12 +79,14 @@ export default {
 * {
   padding: 0;
   margin: 0;
+
   .calendar {
     width: 100%;
     height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
+
     .calendar-size {
       width: 662px;
       height: inherit;
@@ -90,12 +94,14 @@ export default {
       justify-content: center;
       align-items: center;
       position: relative;
+
       .list-of-days {
         width: 95%;
         overflow: hidden;
         display: flex;
         position: absolute;
         margin-right: 10px;
+
         .day {
           min-width: 40px;
           min-height: 50px;
@@ -111,13 +117,16 @@ export default {
             background-color: rgba(0, 0, 0, 0.1);
           }
         }
+
         .current {
           background-color: black;
           color: white;
         }
+
         .black {
           border: 2px solid rgba(0, 0, 0, 0.1);
         }
+
         .orange {
           border: 2px solid rgba(255, 106, 0, 0.9);
           color: rgba(255, 106, 0, 0.9);

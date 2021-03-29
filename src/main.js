@@ -2,8 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import firebase from "firebase/app";
-import "firebase/firestore";
 
 Vue.config.productionTip = false;
 
@@ -17,10 +15,7 @@ const firebaseConfig = {
   appId: process.env.VUE_APP_ID
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-const firestore = firebaseApp.firestore();
-firestore.settings({ timestampsInSnapshots: true });
+const firestore = store.dispatch("INIT_FIREBASE", firebaseConfig);
 
 new Vue({
   router,
