@@ -47,6 +47,7 @@ sass-loader
         - router (index.js)
         - store
             - user (.js)
+            - init (.js)
         - views (.vue)
         - App.vue
         - main.js
