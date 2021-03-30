@@ -37,6 +37,7 @@ export default {
         this.error = mistake;
       } else {
         this.error = "";
+        localStorage.setItem("email", email);
         this.$router.push(routePath.home);
       }
     }
